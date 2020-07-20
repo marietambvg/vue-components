@@ -1,0 +1,25 @@
+.form-control {
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+}
+
+.form-control.small-form {
+  width: 50%;
+}
+
+.acronis-store-form-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: 20px;
+}
+
+.acronis-button {
+  border-radius: 5px;
+  width: 150px;
+  height: 30px;
+  margin-top: 20px;
+}

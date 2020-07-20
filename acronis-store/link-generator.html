@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/vue"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Link Generator</title>
+</head>
+
+<body>
+    <div id="app">
+        <link-generator :items="items" />
+    </div>
+    <script>
+        var acronisDb = [
+            {
+                locale: "en-us",
+                machine_name: "acronis_backup",
+                segment: "corporate",
+                perpetual: {
+                    buy: {
+                        "ABR12-SRV-PERPETUAL": {
+                            abbr: "ABR12-SRV-PERPETUAL",
+                            cb_id: 175240,
+                            price: 1049,
+                            store: 837,
+                            currency: "USD",
+                            product_name: "Acronis Backup 12.5 Standard Server License",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "server"
+                        },
+                        "ABR12-VH-PERPETUAL": {
+                            abbr: "ABR12-VH-PERPETUAL",
+                            cb_id: 175245,
+                            price: 1319,
+                            store: 837,
+                            currency: "USD",
+                            product_name: "Acronis Backup 12.5 Standard Virtual Host License",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "virtual_host"
+                        },
+                        "ABR12-ESS-PERPETUAL": {
+                            abbr: "ABR12-ESS-PERPETUAL",
+                            cb_id: 175250,
+                            price: 499,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Windows Server Essentials License",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "windows_server_essential"
+                        },
+                        "ABR12-WS-PERPETUAL": {
+                            abbr: "ABR12-WS-PERPETUAL",
+                            cb_id: 175255,
+                            price: 89,
+                            store: 837,
+                            currency: "USD",
+                            product_name: "Acronis Backup 12.5 Standard Workstation License",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "workstation"
+                        }
+                    },
+                    upgrade: {
+                        "ABR12-SRV-UPG-PERPETUAL": {
+                            abbr: "ABR12-SRV-UPG-PERPETUAL",
+                            cb_id: 175407,
+                            price: 671.46,
+                            store: 837,
+                            currency: "USD",
+                            product_name: "Acronis Backup 12.5 Standard Server License Upgrade",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "server"
+                        },
+                        "ABR12-VH-UPG-PERPETUAL": {
+                            abbr: "ABR12-VH-UPG-PERPETUAL",
+                            cb_id: 175408,
+                            price: 805.9,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Virtual Host License Upgrade",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "virtual_host"
+                        },
+                        "ABR12-ESS-UPG-PERPETUAL": {
+                            abbr: "ABR12-ESS-UPG-PERPETUAL",
+                            cb_id: 175409,
+                            price: 335.39,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Windows Server Essentials License Upgrade",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "windows_server_essential"
+                        },
+                        "ABR12-WS-UPG-PERPETUAL": {
+                            abbr: "ABR12-WS-UPG-PERPETUAL",
+                            cb_id: 175410,
+                            price: 59.82,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Workstation License Upgrade",
+                            amount: 1,
+                            year: "perpetual",
+                            type: "workstation"
+                        }
+                    }
+                },
+                subscription: {
+                    buy: {
+                        "ABO-365-100MB-1Y": {
+                            abbr: "ABO-365-100MB-1Y",
+                            cb_id: 190326,
+                            price: 1799,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 100 Mailboxes",
+                            amount: 100,
+                            year: 1,
+                            type: "office_365"
+                        },
+                        "ABO-365-100MB-2Y": {
+                            abbr: "ABO-365-100MB-2Y",
+                            cb_id: 190332,
+                            price: 2879,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 100 Mailboxes",
+                            amount: 100,
+                            year: 2,
+                            type: "office_365"
+                        },
+                        "ABO-365-100MB-3Y": {
+                            abbr: "ABO-365-100MB-3Y",
+                            cb_id: 190338,
+                            price: 3599,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 100 Mailboxes",
+                            amount: 100,
+                            year: 3,
+                            type: "office_365"
+                        },
+                        "ABO-365-25MB-3Y": {
+                            abbr: "ABO-365-25MB-3Y",
+                            cb_id: 190337,
+                            price: 1079,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 25 Maiboxes",
+                            amount: 25,
+                            year: 3,
+                            type: "office_365"
+                        },
+                        "ABO-365-25MB-1Y": {
+                            abbr: "ABO-365-25MB-1Y",
+                            cb_id: 190325,
+                            price: 519,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 25 Mailboxes",
+                            amount: 25,
+                            year: 1,
+                            type: "office_365"
+                        },
+                        "ABO-365-25MB-2Y": {
+                            abbr: "ABO-365-25MB-2Y",
+                            cb_id: 190331,
+                            price: 839,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 25 Mailboxes",
+                            amount: 25,
+                            year: 2,
+                            type: "office_365"
+                        },
+                        "ABO-365-5MB-1Y": {
+                            abbr: "ABO-365-5MB-1Y",
+                            cb_id: 190323,
+                            price: 119,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 5 Maiboxes",
+                            amount: 5,
+                            year: 1,
+                            type: "office_365"
+                        },
+                        "ABO-365-5MB-2Y": {
+                            abbr: "ABO-365-5MB-2Y",
+                            cb_id: 190330,
+                            price: 189,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 5 Maiboxes",
+                            amount: 5,
+                            year: 2,
+                            type: "office_365"
+                        },
+                        "ABO-365-5MB-3Y": {
+                            abbr: "ABO-365-5MB-3Y",
+                            cb_id: 190334,
+                            price: 239,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Office 365 Subscription License 5 Maiboxes",
+                            amount: 5,
+                            year: 3,
+                            type: "office_365"
+                        },
+                        "ABR12-VH-1YR": {
+                            abbr: "ABR12-VH-1YR",
+                            cb_id: 175246,
+                            price: 619,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Virtual Host Subscription License",
+                            amount: 1,
+                            year: 1,
+                            type: "virtual_host"
+                        },
+                        "ABR12-VH-2YR": {
+                            abbr: "ABR12-VH-2YR",
+                            cb_id: 175247,
+                            price: 969,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Virtual Host Subscription License",
+                            amount: 1,
+                            year: 2,
+                            type: "virtual_host"
+                        },
+                        "ABR12-VH-3YR": {
+                            abbr: "ABR12-VH-3YR",
+                            cb_id: 175248,
+                            price: 1319,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Virtual Host Subscription License",
+                            amount: 1,
+                            year: 3,
+                            type: "virtual_host"
+                        },
+                        "ABR12-ESS-1YR": {
+                            abbr: "ABR12-ESS-1YR",
+                            cb_id: 175251,
+                            price: 229,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Windows Server Essentials Subscription License",
+                            amount: 1,
+                            year: 1,
+                            type: "windows_server_essential"
+                        },
+                        "ABR12-ESS-2YR": {
+                            abbr: "ABR12-ESS-2YR",
+                            cb_id: 175252,
+                            price: 369,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Windows Server Essentials Subscription License",
+                            amount: 1,
+                            year: 2,
+                            type: "windows_server_essential"
+                        },
+                        "ABR12-ESS-3YR": {
+                            abbr: "ABR12-ESS-3YR",
+                            cb_id: 175253,
+                            price: 499,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Windows Server Essentials Subscription License",
+                            amount: 1,
+                            year: 3,
+                            type: "windows_server_essential"
+                        },
+                        "ABR12-WS-1YR": {
+                            abbr: "ABR12-WS-1YR",
+                            cb_id: 175256,
+                            price: 69,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Workstation Subscription License",
+                            amount: 1,
+                            year: 1,
+                            type: "workstation"
+                        },
+                        "ABR12-WS-2YR": {
+                            abbr: "ABR12-WS-2YR",
+                            cb_id: 175257,
+                            price: 129,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Workstation Subscription License",
+                            amount: 1,
+                            year: 2,
+                            type: "workstation"
+                        },
+                        "ABR12-WS-3YR": {
+                            abbr: "ABR12-WS-3YR",
+                            cb_id: 175258,
+                            price: 179,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Workstation Subscription License",
+                            amount: 1,
+                            year: 3,
+                            type: "workstation"
+                        },
+                        "ABR12-SRV-2YR": {
+                            abbr: "ABR12-SRV-2YR",
+                            cb_id: 175242,
+                            price: 769,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Server Subscription License",
+                            amount: 1,
+                            year: 2,
+                            type: "server"
+                        },
+                        "ABR12-SRV-3YR": {
+                            abbr: "ABR12-SRV-3YR",
+                            cb_id: 175243,
+                            price: 1049,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Server Subscription License",
+                            amount: 1,
+                            year: 3,
+                            type: "server"
+                        },
+                        "ABR12-SRV-1YR": {
+                            abbr: "ABR12-SRV-1YR",
+                            cb_id: 175241,
+                            price: 499,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Server Subscription License",
+                            amount: 1,
+                            year: 1,
+                            type: "server"
+                        },
+                        "ABR12.5-OFFICE-5-1Y": {
+                            abbr: "ABR12_5-OFFICE-5-1Y",
+                            cb_id: 216974,
+                            price: 149,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard Office 365 Pack Subscription License 5 Seats, 1 Year, includes 50 GB of Cloud Storage",
+                            amount: 5,
+                            year: 1,
+                            type: "office_365"
+                        },
+                        "ABR12.5-OFFICE-5-2Y": {
+                            abbr: "ABR12_5-OFFICE-5-2Y",
+                            cb_id: 219928,
+                            price: 229,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard Office 365 Pack Subscription License 5 Seats, 2 Years, includes 50 GB of Cloud Storage",
+                            amount: 5,
+                            year: 2,
+                            type: "office_365"
+                        },
+                        "ABR12.5-OFFICE-5-3Y": {
+                            abbr: "ABR12_5-OFFICE-5-3Y",
+                            cb_id: 219930,
+                            price: 299,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard Office 365 Pack Subscription License 5 Seats, 3 Years, includes 50 GB of Cloud Storage",
+                            amount: 5,
+                            year: 3,
+                            type: "office_365"
+                        },
+                        "ABR12.5-GS-PACK-1Y": {
+                            abbr: "ABR12_5-GS-PACK-1Y",
+                            cb_id: 220255,
+                            price: 149,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Pack Subscription License 5 Seats + 50GB Cloud Storage, 1 Year",
+                            amount: 5,
+                            year: 1,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-PACK-2Y": {
+                            abbr: "ABR12_5-GS-PACK-2Y",
+                            cb_id: 220259,
+                            price: 229,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Pack Subscription License 5 Seats + 50GB Cloud Storage, 2 Year",
+                            amount: 5,
+                            year: 2,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-PACK-3Y": {
+                            abbr: "ABR12_5-GS-PACK-3Y",
+                            cb_id: 220263,
+                            price: 299,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Pack Subscription License 5 Seats + 50GB Cloud Storage, 3 Year",
+                            amount: 5,
+                            year: 3,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-100S-1Y": {
+                            abbr: "ABR12_5-GS-100S-1Y",
+                            cb_id: 220266,
+                            price: 1799,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 100 Seats, 1 Year",
+                            amount: 100,
+                            year: 1,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-25S-1Y": {
+                            abbr: "ABR12_5-GS-25S-1Y",
+                            cb_id: 220265,
+                            price: 519,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 25 Seats, 1 Year",
+                            amount: 25,
+                            year: 1,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-5S-1Y": {
+                            abbr: "ABR12_5-GS-5S-1Y",
+                            cb_id: 220264,
+                            price: 119,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 5 Seats, 1 Year",
+                            amount: 5,
+                            year: 1,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-100S-2Y": {
+                            abbr: "ABR12_5-GS-100S-2Y",
+                            cb_id: 220269,
+                            price: 2879,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 100 Seats, 2 Year",
+                            amount: 100,
+                            year: 2,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-25S-2Y": {
+                            abbr: "ABR12_5-GS-25S-2Y",
+                            cb_id: 220268,
+                            price: 839,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 25 Seats, 2 Year",
+                            amount: 25,
+                            year: 2,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-5S-2Y": {
+                            abbr: "ABR12_5-GS-5S-2Y",
+                            cb_id: 220267,
+                            price: 189,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 5 Seats, 2 Year",
+                            amount: 5,
+                            year: 2,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-100S-3Y": {
+                            abbr: "ABR12_5-GS-100S-3Y",
+                            cb_id: 220273,
+                            price: 3599,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 100 Seats, 3 Year",
+                            amount: 100,
+                            year: 3,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-25S-3Y": {
+                            abbr: "ABR12_5-GS-25S-3Y",
+                            cb_id: 220272,
+                            price: 1079,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 25 Seats, 3 Year",
+                            amount: 25,
+                            year: 3,
+                            type: "g_suite"
+                        },
+                        "ABR12.5-GS-5S-3Y": {
+                            abbr: "ABR12_5-GS-5S-3Y",
+                            cb_id: 220271,
+                            price: 239,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup Standard G Suite Subscription License 5 Seats, 3 Year",
+                            amount: 5,
+                            year: 3,
+                            type: "g_suite"
+                        }
+                    }
+                },
+                maintenance: {
+                    buy: {
+                        "ABR12-SRV-MAINTENANCE": {
+                            abbr: "ABR12-SRV-MAINTENANCE",
+                            cb_id: 175411,
+                            price: 180.15,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Server License \u2013 Maintenance AAP ESD",
+                            amount: 1,
+                            year: 1,
+                            type: "server"
+                        },
+                        "ABR12-VH-MAINTENANCE": {
+                            abbr: "ABR12-VH-MAINTENANCE",
+                            cb_id: 175412,
+                            price: 216.22,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Virtual Host License \u2013 Maintenance AAP ESD",
+                            amount: 1,
+                            year: 1,
+                            type: "virtual_host"
+                        },
+                        "ABR12-ESS-MAINTENANCE": {
+                            abbr: "ABR12-ESS-MAINTENANCE",
+                            cb_id: 175413,
+                            price: 89.98,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Windows Server Essentials License \u2013 Maintenance AAP ESD",
+                            amount: 1,
+                            year: 1,
+                            type: "windows_server_essential"
+                        },
+                        "ABR12-WS-MAINTENANCE": {
+                            abbr: "ABR12-WS-MAINTENANCE",
+                            cb_id: 175415,
+                            price: 16.05,
+                            store: 837,
+                            currency: "USD",
+                            product_name:
+                                "Acronis Backup 12.5 Standard Workstation License \u2013 Maintenance AAP",
+                            amount: 1,
+                            year: 1,
+                            type: "workstation"
+                        },
+                        "ACBO-ST": {
+                            abbr: "ACBO-ST",
+                            cb_id: 224782,
+                            price: 149,
+                            store: 837,
+                            currency: "USD",
+                            product_name: "Onboarding Service for Acronis Cyber Backup Standard",
+                            amount: 1
+                        }
+                    }
+                }
+            }
+        ];
+        Vue.component('link-generator', {
+            name: 'link-generator',
+            props: ['items'],
+            data() {
+                return {
+                    selectedItem: -1,
+                    link: "",
+                    showLink: false
+                }
+            },
+            methods: {
+                generateLink(event) {
+                    event.preventDefault();
+                    //https://store.acronis.com/837/purl-consumer-standard-US?cart=175245&currencies=USD
+                    let item = this.selectedItem;
+                    if (item !== -1) {
+                        this.link = "https://store.acronis.com/" + item.store + "/purl-consumer-standard-US?cart=" + item.cb_id + "&currencies=" + item.currency;
+                        this.showLink = true;
+                    }
+                },
+                onSelectionChange() {
+                    this.showLink = false;
+                }
+            },
+            template: `<form class="acronis-store-form" @submit="generateLink">
+                            <div class="acronis-store-form-info form-control small-form">
+                                <select class="form-control" v-model="selectedItem" @change="onSelectionChange">
+                                    <option class="form-control" :value="-1">Options</option>
+                                    <option class="form-control" v-for="(item,index) in items" :key="index" :value="item">{{item.product_name}}</option>
+                                </select>
+                                <input class="acronis-button" type="submit" :disabled="selectedItem==-1" value="Search"/>
+                            </div>    
+                            <div v-show="showLink" class="acronis-link-box form-control small-form">
+                                <a target="_blank" :href="link">{{link}}</a>
+                            </div>
+                        </form>`
+        });
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    items: []
+                }
+            },
+
+            mounted() {
+                let acronisData = [
+                    acronisDb[0].perpetual.buy,
+                    acronisDb[0].perpetual.upgrade,
+                    acronisDb[0].subscription.buy,
+                    acronisDb[0].maintenance.buy
+                ];
+                let arr = [];
+                acronisData.forEach(element => {
+                    arr.push.apply(
+                        arr,
+                        Object.keys(element).map(k => element[k])
+                    );
+                });
+                this.items = [].concat(arr);
+            },
+        })
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/vue"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sort method</title>
+</head>
+
+<body>
+    <div id="app">
+        <sort-method />
+    </div>
+    <script>
+        const reverseDates = item => {
+            let parts = item.date.split('.');
+            return `${parts[1]}-${parts[0]}-${parts[2]}`;
+        };
+        const reverseDatesDots = item => {
+            let parts = item.split('-');
+            return { date: `${parts[1]}.${parts[0]}.${parts[2]}` };
+        };
+        Vue.component('sort-method', {
+            name: 'sort-method',
+            data() {
+                return {
+                    ascending: true,
+                    items: [{ date: '10.01.2017' }, { date: '05.11.2016' }, { date: '21.12.2002' }]
+                }
+            },
+            methods: {
+                sort() {
+
+                    this.items.forEach(element => {
+                    });
+                    if (this.ascending) {
+                        this.items = this.items
+                            .map(reverseDates)
+                            .sort((a, b) => {
+                                return new Date(a) - new Date(b);
+                            })
+                            .map(reverseDatesDots);
+                    } else {
+                        this.items = this.items
+                            .map(reverseDates)
+                            .sort((a, b) => {
+                                return new Date(b) - new Date(a);
+                            })
+                            .map(reverseDatesDots);
+                    }
+                    this.ascending = !this.ascending;
+                },
+
+            },
+            template: `<div class="acronis-store-form-info form-control small-form">
+                            <div class="form-control" v-for="(item,index) in items" :key="index">{{item.date}}</div>
+                            <button class="acronis-button" type="button" @click="sort">Sort <span v-if="ascending==false">decsending</span><span v-else>ascending</span></button>
+                        </div> `
+
+
+        });
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+
+                }
+            },
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

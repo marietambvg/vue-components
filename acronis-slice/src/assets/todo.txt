@@ -1,0 +1,5 @@
+create content
+decide how to pass data
+decide which css convention to use
+how to pass text - text or html
+how to display links in text
